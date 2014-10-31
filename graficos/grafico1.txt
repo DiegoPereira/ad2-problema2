@@ -1,0 +1,5 @@
+Pergunta: As musicas estão mais longas ou mais curtas com o passar do tempo?
+
+Com esse gráfico, relacionamos o tempo das musicas com a duração da mesma.
+O tamanho do círculo indica o percentual de musicas em determinada duração,
+por exemplo uma circunferência indica que 40% das musicas de rock em 1992 duravam em média 5 minutos.

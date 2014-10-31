@@ -1,0 +1,4 @@
+3 - Há correlação entre o ano da musica, familiaridade do artista e o seu hotness atual?
+
+Cada linha indica uma música, cada uma das barras é uma variável proposta(ano, familiaridade e hotness).
+A partir daí o gráfico pode nos ajudar a enxergar se há correlação.

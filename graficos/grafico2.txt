@@ -1,0 +1,4 @@
+Pergunta: O número de musicas de determinado gênero cresce ou diminui de acordo com os anos?
+
+O eixo vertical indica o numero de músicas, o horizontal os anos e cada linha indica um gênero.
+Por exemplo rock podemos visualizar ser o número de músicas de rock vem diminuindo com o passar dos anos.
