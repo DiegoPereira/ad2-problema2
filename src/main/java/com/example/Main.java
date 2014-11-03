@@ -39,13 +39,16 @@ class Main {
 	                String[] divisaoMusica = musica.get(0).split(",");
 	                String artista = divisaoMusica[4];
 	                System.out.println("artista" + artista);
-	                artista = "ARW0Z9V1187B9A0699";
 	                ArrayList<String> tags = realizaConsulta(1, "SELECT * FROM artist_mbtag WHERE artist_id='" +
 	                artista.trim() + "'");
 	                
 	                for(String t: tags){
 	                	String tag = t.split(",")[1];
-	                	System.out.println("ano: " + ano + "tag: "+ tag + "musica: " + nomeMusica);
+	                	if(tag.trim().equals("rock") || tag.trim().equals("reggae") || tag.trim().equals("pop") ||
+	                			tag.trim().equals("country") || tag.trim().equals("jazz")){
+		                	CSVTests.escreve(ano, tag, nomeMusica);
+		                	System.out.println("ano: " + ano + "tag: "+ tag + "musica: " + nomeMusica);
+	                	}
 	                }
 	                
 	                System.out.println("________________________________\n\n\n\n");
