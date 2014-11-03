@@ -27,16 +27,12 @@ class Main2 {
             CONNECTIONS[2] = DriverManager.getConnection("jdbc:sqlite:db/" + DBS[2]);
 
             while (true) {
-            	System.out.println("1");
-                Connection selConn = readDB(0);
-                String query = readQuery("SELECT * FROM songs WHERE artist_name='Aerosmith'");
-                //String query = "SELECT * FROM songs WHERE artist_name='Aerosmith'";
-                System.out.println(query);
-                System.out.println("2");
+                Connection selConn = readDB();
+                String query = readQuery();
+
                 for (String result : runQuery(selConn, query)) {
-                	System.out.println("3");
                     out.println(result);
-                }break;
+                }
             }
 
         } catch (Exception e) {
@@ -60,9 +56,9 @@ class Main2 {
         out.println("2 - subset_artist_similarity");
     }
 
-    private static Connection readDB(int sel) {
-        //printDBS();
-        //int sel = in.nextInt();
+    private static Connection readDB() {
+        printDBS();
+        int sel = in.nextInt();
         if (sel < 0 || sel > 2) {
             System.exit(0);
             return null;
@@ -71,11 +67,10 @@ class Main2 {
         }
     }
 
-    private static String readQuery(String consulta) {
-        //out.println("Digite a consulta que você deseja executar");
-       // in.nextLine();
-
-        return consulta;
+    private static String readQuery() {
+        out.println("Digite a consulta que você deseja executar");
+        in.nextLine();
+        return in.nextLine();
     }
 
     private static List<String> runQuery(Connection conn, String query) throws SQLException {

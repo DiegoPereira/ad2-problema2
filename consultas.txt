@@ -13,3 +13,5 @@ SELECT * FROM artist_mbtag WHERE mbtag='00s'
 SELECT * FROM mbtags
 
 SELECT COUNT(mbtag) FROM artist_mbtag where mbtag='10s'
+
+SELECT * FROM artist_mbtag WHERE artist_id='ARW0Z9V1187B9A0699'

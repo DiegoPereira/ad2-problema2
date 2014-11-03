@@ -3,16 +3,20 @@ package main.java.com.example;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Scanner;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
-//import org.sqlite.JDBC;
 
+
+
+
+
+
+import scala.collection.Iterator;
 import static java.lang.System.*;
 
 class Main {
-    private static Scanner in = new Scanner(System.in);
+	
     private static Connection[] CONNECTIONS = new Connection[3];
     public static String[] partes;
     
@@ -23,33 +27,43 @@ class Main {
         try { 
         	FileReader arq = new FileReader("db/subset_tracks_per_year.txt");
         	BufferedReader lerArq = new BufferedReader(arq);
-        	String linha = lerArq.readLine(); // lê a primeira linha 
-        	// a variável "linha" recebe o valor "null" quando o processo 
-        	// de repetição atingir o final do arquivo texto 
+        	String linha = lerArq.readLine();  
         	while (linha != null) { 
-        		//System.out.printf("%s\n", linha);
+        		
         		linha = lerArq.readLine();// lê da segunda até a última linha
         		if (linha != null){
 	        		partes = linha.split("<SEP>");
-	        		//System.out.println(partes[0]);
-	        		//System.out.println(partes[1]);
+	        		String ano = partes[0];
+	        		String nomeMusica = partes[3];
+	        		ArrayList<String> musica = realizaConsulta(0, "SELECT * FROM songs WHERE track_id='" + partes[1] + "'");
+	                String[] divisaoMusica = musica.get(0).split(",");
+	                String artista = divisaoMusica[4];
+	                System.out.println("artista" + artista);
+	                artista = "ARW0Z9V1187B9A0699";
+	                ArrayList<String> tags = realizaConsulta(1, "SELECT * FROM artist_mbtag WHERE artist_id='" +
+	                artista.trim() + "'");
+	                
+	                for(String t: tags){
+	                	String tag = t.split(",")[1];
+	                	System.out.println("ano: " + ano + "tag: "+ tag + "musica: " + nomeMusica);
+	                }
+	                
+	                System.out.println("________________________________\n\n\n\n");
         		}
         	}
         }catch(IOException e){
         	System.err.printf("Erro na abertura do arquivo: %s.\n",
         	          e.getMessage());
         }
-        realizaConsulta(0, "SELECT * FROM songs WHERE artist_name='Aerosmith'");
-        realizaConsulta(1, "SELECT * FROM artist_mbtag WHERE artist_id='AR12F2S1187FB56EEF'");
-        
+       
     }
     
-    private static void realizaConsulta(int bd, String query2){
+    private static ArrayList<String> realizaConsulta(int bd, String query2){
     	final String[] DBS = {"subset_track_metadata.db", "subset_artist_term.db", "subset_artist_similarity.db"};
-    	
+    	ArrayList<String> resultado = new ArrayList<>();
     	try {
             Class.forName("org.sqlite.JDBC");
-
+            
             CONNECTIONS[0] = DriverManager.getConnection("jdbc:sqlite:db/" + DBS[0]);
             CONNECTIONS[1] = DriverManager.getConnection("jdbc:sqlite:db/" + DBS[1]);
             CONNECTIONS[2] = DriverManager.getConnection("jdbc:sqlite:db/" + DBS[2]);
@@ -57,16 +71,14 @@ class Main {
             while (true) {
                 Connection selConn = readDB(bd);
                 String query = "SELECT * FROM songs WHERE track_id='" + partes[1] + "'";
-                System.out.println(query);
-                System.out.println(partes[0]);
-                System.out.println(partes[1]);
-                System.out.println(partes[2]);
                 //String query = "SELECT * FROM songs WHERE artist_name='Aerosmith' ";
                 		/**readQuery(); **/
 
                 
+                
                 for (String result : runQuery(selConn, query2)) {
-                	out.println(result);
+                	resultado.add(result);
+                	//out.println(result);
                 }break;
             }
 
@@ -81,12 +93,12 @@ class Main {
                 }
             }
         }
+    	return resultado;
     }
 
 
     private static Connection readDB(int sel) {
-        //printDBS();
-        //int sel = in.nextInt();
+
         if (sel < 0 || sel > 2) {
             System.exit(0);
             return null;
