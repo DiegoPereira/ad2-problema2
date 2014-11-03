@@ -1,0 +1,15 @@
+SELECT * FROM songs WHERE artist_name='Aerosmith'
+
+artist_id = AR12F2S1187FB56EEF
+
+SELECT * FROM similarity WHERE target='AR12F2S1187FB56EEF'
+
+SELECT target FROM similarity
+
+AR12F2S1187FB56EEF
+
+SELECT * FROM artist_mbtag WHERE artist_id='AR12F2S1187FB56EEF'
+SELECT * FROM artist_mbtag WHERE mbtag='00s'
+SELECT * FROM mbtags
+
+SELECT COUNT(mbtag) FROM artist_mbtag where mbtag='10s'
