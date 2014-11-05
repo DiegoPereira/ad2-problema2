@@ -7,7 +7,7 @@ output: html_document
 
   Este é um relatório referente a segunda atividade da disciplina de Análise de Dados II, da Universidade Federal de Campina Grande, ministrada pelo professor Nazareno Andrade.
 
-  O intuito Geral dessa análise é termos algumas informações sobre músicas, utilizando a base de dados MIllion Song Subset.
+  O intuito Geral dessa análise é termos algumas informações sobre músicas, utilizando a base de dados Million Song Subset.
   
   Os dados das musicas estão disponí­veis [aqui](http://static.echonest.com/millionsongsubset_full.tar.gz).
 
@@ -19,10 +19,10 @@ Todos os artefatos desse experimento, incluindo o código, extração dos novos dad
 Comumente ouvimos frases similares ao título dessa seção, não só relacionado ao rock propriamente dito, mas a todos os outros gêneros tradicionais. Com a ascensão de novos gêneros (como Happy rock por exemplo), maior número de músicas lançadas por ano e o nosso maior acesso a elas, não é tão estranha a sensação de que o tradicional está morrendo.
 
 
-Selecionei 5 gêneros tradicionais(country, rock, reggae, pop e jazz) e veio a pergunta: O número de lançamentos desses gêneros vem realmente diminuindo?
+Foram selecionados 5 gêneros tradicionais(country, rock, reggae, pop e jazz) e veio a pergunta: O número de lançamentos desses gêneros vem realmente diminuindo?
 
 
-No gráfico abaixo, podemos observar que não é bem assim, o número de músicas dos gêneros tradicionais, apesar de pequenas quedas, tende a aumentar significativamente, como é o caso do rock e do pop. Para reggae e jazz, valores são praticamente constantes (apesar de uma mudança significativa na década de 90). Gostaria de destacar o country, assim como o sertanejo brasileiro, passam por alguns anos de "esquecimento" porém há épocas em que voltam a ser tendência.
+No gráfico abaixo, podemos observar que não é bem assim, o número de músicas dos gêneros tradicionais, apesar de pequenas quedas, tende a aumentar significativamente, como é o caso do rock e do pop. Para reggae e jazz, valores são praticamente constantes (apesar de uma mudança significativa na década de 90). Destacamos o country, assim como o sertanejo brasileiro, passam por alguns anos de "esquecimento" porém há épocas em que voltam a ser tendência.
 
 ```{r, echo=FALSE}
 library(ggplot2)
@@ -58,7 +58,7 @@ Devido a isso, temos outra versão do gráfico com tamanho contante dos circulos(F
 De imediato, percebemos que o jazz possui as músicas mais longas, músicas até 1966 eram bem mais curtas (até 200 segundos) e que o reggae vem possuindo músicas mais curtas.
 
 
-Para os observadores um pouco mais criteriosos, podemos observar que a distribuição até em torno dos anos 2000 se assemelha a uma parábola. Possui ascensão entre as décadas de 60 e 80, ápice entre 80 e 90 e uma queda após isso, porém por volta de 2005 volta a subir.
+Para os observadores um pouco mais criteriosos, percebe-se que a distribuição até em torno dos anos 2000 se assemelha a uma parábola. Possui ascensão entre as décadas de 60 e 80, ápice entre 80 e 90 e uma queda após isso, porém por volta de 2005 volta a subir.
 
 
 Não podemos afirmar que a duração das músicas está seguindo alguma tendência (para maior ou menor). Podemos tentar reconhecer alguns padrões, porém nada muito conclusivo e de maneira alguma podemos inferir a tendência média de minutos para daqui a 10 anos por exemplo.
