@@ -47,11 +47,11 @@ class Main {
 	                	if(tag.trim().equals("rock") || tag.trim().equals("reggae") || tag.trim().equals("pop") ||
 	                			tag.trim().equals("country") || tag.trim().equals("jazz")){
 		                	CSVTests.escreve(ano, tag, nomeMusica);
-		                	System.out.println("ano: " + ano + "tag: "+ tag + "musica: " + nomeMusica);
+		                //	System.out.println("ano: " + ano + "tag: "+ tag + "musica: " + nomeMusica);
 	                	}
 	                }
 	                
-	                System.out.println("________________________________\n\n\n\n");
+	              //  System.out.println("________________________________\n\n\n\n");
         		}
         	}
         }catch(IOException e){

@@ -15,3 +15,9 @@ SELECT * FROM mbtags
 SELECT COUNT(mbtag) FROM artist_mbtag where mbtag='10s'
 
 SELECT * FROM artist_mbtag WHERE artist_id='ARW0Z9V1187B9A0699'
+
+if(tag.trim().equals("Rock") || tag.trim().equals("Rock") || tag.trim().equals("Rock") ||
+	                			tag.trim().equals("Rock") || tag.trim().equals("Rock")){
+		                	CSVTests.escreve(ano, tag, nomeMusica);
+		                	System.out.println("ano: " + ano + "tag: "+ tag + "musica: " + nomeMusica);
+	                	}

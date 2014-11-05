@@ -1,0 +1,39 @@
+---
+title: "AD2-Problema2"
+author: "Diego de Lima Pereira"
+date: "Wednesday, October 15, 2014"
+output: html_document
+---
+
+  Este é um relatório referente a primeira atividade da disciplina de Análise de Dados II, da Universidade Federal de Campina Grande, ministrada pelo professor Nazareno Andrade.
+
+  O intuito Geral dessa análise é termos uma ideia do perfil do profissional de TI no Brasil, em relação de algumas variáveis que dispomos.
+  
+  Os dados estão disponí­veis [aqui](https://sites.google.com/a/computacao.ufcg.edu.br/analise-de-dados-1/problema/salarios-ti-regioes.csv).
+
+O problema encontra-se [aqui](https://docs.google.com/document/d/1Yhp0b9UJTrca0Z3b8IDLIl6lj-G_81HBiUCAjZ2WZfQ/).
+
+
+**1. Visão Geral de Hans Rosling sobre a divisão socioecônomica entre primeiro mundo e terceiro mundo.**
+
+A pergunta que foi feita inicialmente foi se podemos dividir o mundo em mundo ocidental e em terceiro mundo. Onde o primeiro tinha vida longa e família pequena, e o segundo famílias grandes e pouca expectativa de vida. A primeira observação mostra que na medida que os países investem mais em saúde a expectativa de vida o comportamento de famílias pequenas e boa expectativa de vida se assemelha ao dos países ricos do ocidente.
+Daí vem a dúvida do que teria ocasionado isso, e ele começa a perguntar ao dados o motivo disso, primeira informação foi a distribuição de renda. O fato interessante é o crescimento da Ásia e sua gradativa saída do grupo dos mais pobres. Depois o gancho foi relacionar a taxa de mortalidade infantil com o PIB per capita de cada região e podemos observar que mesmo dentro das regiões há grandes diferenças econômicas e socioculturais. Uma boa constatação é que segundo os dados um país saudável se desenvolve mais rapidamente do que um rico.
+No geral não tive dúvidas sobre o vídeo.
+
+**2. Panorama Geral dos Profissionais de TI**
+
+Os dados são constítuidos dos campos: Cidade, UF, salario bruto, horas diarias, tempo de empresa, experiência profissional, iniciativa, cargo, formacao, pos graduacao ou certificacao e regiao.
+
+
+Abaixo podemos encontrar a distribuição de salários em função dos estados, podemos observar logo de imediato que Minas Gerais possui o maior número de empregados na área.
+```{r, echo=FALSE}
+library(ggplot2)
+mainDados <- read.csv("C:/Users/diego/Desktop/ad2-p2/mainDados.csv")
+main2 <- mainDados
+main2$val <- 1
+t <- aggregate(main2$val, list(main2$tag, main2$ano), FUN=sum, na.rm=TRUE)
+ggplot(data=t, aes(x=Group.2 , y=x , group=Group.1, color=Group.1))+geom_line(size=1)
+```
+
+Porém é interessante ter uma visão mais ampla, separando por estados, temos a seguinte distribuição:
+
