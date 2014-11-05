@@ -36,4 +36,15 @@ ggplot(data=t, aes(x=Group.2 , y=x , group=Group.1, color=Group.1))+geom_line(si
 ```
 
 Porém é interessante ter uma visão mais ampla, separando por estados, temos a seguinte distribuição:
+```{r, echo=FALSE}
+mainDadosComTempo <- read.csv("C:/Users/diego/Desktop/ad2-p2/mainDadosComTempo.csv")
+m <- aggregate(mainDadosComTempo$duracao, list(mainDadosComTempo$tag, mainDadosComTempo$ano), FUN=mean, na.rm=TRUE)
+main3 <- mainDadosComTempo
+main3$val <- 1
+m2 <- aggregate(main3$val, list(mainDadosComTempo$tag, mainDadosComTempo$ano), FUN=sum, na.rm=TRUE)
+m$numero <- m2$x
+p <- ggplot(m, aes(Group.2, x))
+p+geom_point(aes(color=Group.1, size=numero))
+````
+
 

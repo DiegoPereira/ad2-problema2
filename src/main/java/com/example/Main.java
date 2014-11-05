@@ -8,11 +8,6 @@ import java.io.FileReader;
 import java.io.IOException;
 
 
-
-
-
-
-import scala.collection.Iterator;
 import static java.lang.System.*;
 
 class Main {
@@ -38,6 +33,7 @@ class Main {
 	        		ArrayList<String> musica = realizaConsulta(0, "SELECT * FROM songs WHERE track_id='" + partes[1] + "'");
 	                String[] divisaoMusica = musica.get(0).split(",");
 	                String artista = divisaoMusica[4];
+	                String duracao = divisaoMusica[7];
 	                System.out.println("artista" + artista);
 	                ArrayList<String> tags = realizaConsulta(1, "SELECT * FROM artist_mbtag WHERE artist_id='" +
 	                artista.trim() + "'");
@@ -46,7 +42,10 @@ class Main {
 	                	String tag = t.split(",")[1];
 	                	if(tag.trim().equals("rock") || tag.trim().equals("reggae") || tag.trim().equals("pop") ||
 	                			tag.trim().equals("country") || tag.trim().equals("jazz")){
-		                	CSVTests.escreve(ano, tag, nomeMusica);
+	                		//String radicalAno = ano.substring(0, 3);
+	                		int duracaoMin = (int) Math.round(Double.parseDouble(duracao));
+	                		String strMin = Integer.toString(duracaoMin);
+		                	CSVTests.escreve(ano, tag, nomeMusica, strMin);
 		                //	System.out.println("ano: " + ano + "tag: "+ tag + "musica: " + nomeMusica);
 	                	}
 	                }
@@ -73,7 +72,7 @@ class Main {
 
             while (true) {
                 Connection selConn = readDB(bd);
-                String query = "SELECT * FROM songs WHERE track_id='" + partes[1] + "'";
+               // String query = "SELECT * FROM songs WHERE track_id='" + partes[1] + "'";
                 //String query = "SELECT * FROM songs WHERE artist_name='Aerosmith' ";
                 		/**readQuery(); **/
 

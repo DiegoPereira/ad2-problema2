@@ -8,8 +8,8 @@ import com.csvreader.CsvWriter;
 
 public class CSVTests{
 	
-	public static void escreve(String ano, String tag, String nomeMusica){
-		String outputFile = "mainDados.csv";
+	public static void escreve(String ano, String tag, String nomeMusica, String duracao){
+		String outputFile = "mainDadosComTempo.csv";
 		
 		// before we open the file check to see if it already exists
 		boolean alreadyExists = new File(outputFile).exists();
@@ -24,6 +24,7 @@ public class CSVTests{
 				csvOutput.write("ano");
 				csvOutput.write("tag");
 				csvOutput.write("nomeMusica");
+				csvOutput.write("duracao");
 				csvOutput.endRecord();
 			}
 			// else assume that the file already has the correct header line
@@ -32,6 +33,8 @@ public class CSVTests{
 			csvOutput.write(ano);
 			csvOutput.write(tag);
 			csvOutput.write(nomeMusica);
+			csvOutput.write(duracao);
+			
 			csvOutput.endRecord();
 			
 			//csvOutput.write("2");
