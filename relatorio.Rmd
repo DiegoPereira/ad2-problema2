@@ -1,41 +1,43 @@
 ---
 title: "AD2-Problema2"
 author: "Diego de Lima Pereira"
-date: "Wednesday, October 15, 2014"
+date: "Wednesday, November 05, 2014"
 output: html_document
 ---
 
-  Este é um relatório referente a primeira atividade da disciplina de Análise de Dados II, da Universidade Federal de Campina Grande, ministrada pelo professor Nazareno Andrade.
+  Este é um relatório referente a segunda atividade da disciplina de Análise de Dados II, da Universidade Federal de Campina Grande, ministrada pelo professor Nazareno Andrade.
 
-  O intuito Geral dessa análise é termos uma ideia do perfil do profissional de TI no Brasil, em relação de algumas variáveis que dispomos.
+  O intuito Geral dessa análise é termos algumas informações sobre músicas, utilizando a base de dados MIllion Song Subset.
   
-  Os dados estão disponí­veis [aqui](https://sites.google.com/a/computacao.ufcg.edu.br/analise-de-dados-1/problema/salarios-ti-regioes.csv).
+  Os dados das musicas estão disponí­veis [aqui](http://static.echonest.com/millionsongsubset_full.tar.gz).
 
-O problema encontra-se [aqui](https://docs.google.com/document/d/1Yhp0b9UJTrca0Z3b8IDLIl6lj-G_81HBiUCAjZ2WZfQ/).
-
-
-**1. Visão Geral de Hans Rosling sobre a divisão socioecônomica entre primeiro mundo e terceiro mundo.**
-
-A pergunta que foi feita inicialmente foi se podemos dividir o mundo em mundo ocidental e em terceiro mundo. Onde o primeiro tinha vida longa e família pequena, e o segundo famílias grandes e pouca expectativa de vida. A primeira observação mostra que na medida que os países investem mais em saúde a expectativa de vida o comportamento de famílias pequenas e boa expectativa de vida se assemelha ao dos países ricos do ocidente.
-Daí vem a dúvida do que teria ocasionado isso, e ele começa a perguntar ao dados o motivo disso, primeira informação foi a distribuição de renda. O fato interessante é o crescimento da Ásia e sua gradativa saída do grupo dos mais pobres. Depois o gancho foi relacionar a taxa de mortalidade infantil com o PIB per capita de cada região e podemos observar que mesmo dentro das regiões há grandes diferenças econômicas e socioculturais. Uma boa constatação é que segundo os dados um país saudável se desenvolve mais rapidamente do que um rico.
-No geral não tive dúvidas sobre o vídeo.
-
-**2. Panorama Geral dos Profissionais de TI**
-
-Os dados são constítuidos dos campos: Cidade, UF, salario bruto, horas diarias, tempo de empresa, experiência profissional, iniciativa, cargo, formacao, pos graduacao ou certificacao e regiao.
+Todos os artefatos desse experimento, incluindo o código, extração dos novos dados e resultados, podem ser encontradas no meu repositório do github [aqui](https://github.com/DiegoPereira/ad2-problema2).
 
 
-Abaixo podemos encontrar a distribuição de salários em função dos estados, podemos observar logo de imediato que Minas Gerais possui o maior número de empregados na área.
+**1. O Rock está realmente morrendo?**
+
+Comumente ouvimos frases similares ao título dessa seção, não só relacionado ao rock propriamente dito, mas a todos os outros gêneros tradicionais. Com a ascensão de novos gêneros (como Happy rock por exemplo), maior número de músicas lançadas por ano e o nosso maior acesso a elas, não é tão estranha a sensação de que o tradicional está morrendo.
+
+
+Selecionei 5 gêneros tradicionais(country, rock, reggae, pop e jazz) e veio a pergunta: O número de lançamentos desses gêneros vem realmente diminuindo?
+
+
+No gráfico abaixo, podemos observar que não é bem assim, o número de músicas dos gêneros tradicionais, apesar de pequenas quedas, tende a aumentar significativamente, como é o caso do rock e do pop. Para reggae e jazz, valores são praticamente constantes (apesar de uma mudança significativa na década de 90). Gostaria de destacar o country, assim como o sertanejo brasileiro, passam por alguns anos de "esquecimento" porém há épocas em que voltam a ser tendência.
+
 ```{r, echo=FALSE}
 library(ggplot2)
 mainDados <- read.csv("C:/Users/diego/Desktop/ad2-p2/mainDados.csv")
 main2 <- mainDados
 main2$val <- 1
 t <- aggregate(main2$val, list(main2$tag, main2$ano), FUN=sum, na.rm=TRUE)
-ggplot(data=t, aes(x=Group.2 , y=x , group=Group.1, color=Group.1))+geom_line(size=1)
+ggplot(data=t, aes(x=Group.2 , y=x , group=Group.1, color=Group.1))+geom_line(size=1) + ylab('Quantidade de Músicas') + xlab("Anos") + ggtitle("Gráfico I - Quantidade de músicas\n por gênero ao longo dos anos")
 ```
 
-Porém é interessante ter uma visão mais ampla, separando por estados, temos a seguinte distribuição:
+
+**2. As músicas estão mais curtas ou mais longas com o passar do tempo?**
+
+Primeiramente, abaixo está um gráfico que relaciona o Gráfico I com o tempo das músicas. Na horizontal temos os anos, na vertical temos a duração média em segundos, a cor da bolha indica o gênero e seu tamanho indica a quantidade de músicas lançadas. 
+ 
 ```{r, echo=FALSE}
 mainDadosComTempo <- read.csv("C:/Users/diego/Desktop/ad2-p2/mainDadosComTempo.csv")
 m <- aggregate(mainDadosComTempo$duracao, list(mainDadosComTempo$tag, mainDadosComTempo$ano), FUN=mean, na.rm=TRUE)
@@ -44,7 +46,27 @@ main3$val <- 1
 m2 <- aggregate(main3$val, list(mainDadosComTempo$tag, mainDadosComTempo$ano), FUN=sum, na.rm=TRUE)
 m$numero <- m2$x
 p <- ggplot(m, aes(Group.2, x))
-p+geom_point(aes(color=Group.1, size=numero))
+p+geom_point(aes(color=Group.1, size=numero)) + ylab('Duração (segundos)') + xlab("Anos") + ggtitle("Gráfico II - Duração das músicas por gênero\n ao longo dos anos (com quantidade)")
 ````
+
+Apesar das informações citadas anteriormente, o tamanho da bolha chama muito a atenção podemos levar a interpretações equivocadas dos leitores.
+
+
+Devido a isso, temos outra versão do gráfico com tamanho contante dos circulos(Figura III).
+
+
+De imediato, percebemos que o jazz possui as músicas mais longas, músicas até 1966 eram bem mais curtas (até 200 segundos) e que o reggae vem possuindo músicas mais curtas.
+
+
+Para os observadores um pouco mais criteriosos, podemos observar que a distribuição até em torno dos anos 2000 se assemelha a uma parábola. Possui ascensão entre as décadas de 60 e 80, ápice entre 80 e 90 e uma queda após isso, porém por volta de 2005 volta a subir.
+
+
+Não podemos afirmar que a duração das músicas está seguindo alguma tendência (para maior ou menor). Podemos tentar reconhecer alguns padrões, porém nada muito conclusivo e de maneira alguma podemos inferir a tendência média de minutos para daqui a 10 anos por exemplo.
+
+```{r, echo=FALSE}
+p+geom_point(aes(color=Group.1))+ ylab('Duração (segundos)') + xlab("Anos") + ggtitle("Gráfico III - Duração das músicas por gênero\n ao longo dos anos (sem quantidade)")
+
+
+```
 
 
